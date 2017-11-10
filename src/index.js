@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
+import App from './App.js';
 import store from './store';
+import './index.css';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -12,4 +11,3 @@ ReactDOM.render(
   </Provider>, 
   document.getElementById('root')
 );
-registerServiceWorker();

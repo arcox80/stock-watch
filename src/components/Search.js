@@ -26,4 +26,8 @@ export class Search extends React.Component {
   }
 };
 
-export default connect(Search);
+const mapStateToProps = state => {
+  return state;
+};
+
+export default connect(mapStateToProps)(Search);
