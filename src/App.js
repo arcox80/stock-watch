@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 import Search from './components/Search';
-//import SearchResults from './components/SearchResults';
-//import Headlines from './components/Headlines';
+import SearchResults from './components/SearchResults';
+import Headlines from './components/Headlines';
 
 export default function App(props) {
   return (
