@@ -9,9 +9,10 @@ export class Search extends React.Component {
   submitStock(event) {
       event.preventDefault();
       this.props.dispatch(fetchStockRequest());
-      const value = this.input.value;
+      let value = event.target.querySelector('input').value;
+      console.log(value);
       this.props.dispatch(fetchStock(value));
-      this.input.value = '';        
+      value = '';        
   }
 
   render() {

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Search from './components/Search';
 import SearchResults from './components/SearchResults';
-import Headlines from './components/Headlines';
+//import Headlines from './components/Headlines';
 
 export default function App(props) {
   return (
@@ -11,6 +11,7 @@ export default function App(props) {
         <h1 className="App-title">Stock-Watch</h1>
       </header>
       <Search />
+      <SearchResults />
       <footer className="App-footer"></footer>
     </div>
   );

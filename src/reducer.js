@@ -21,10 +21,7 @@ export const stockReducer = (state=initialState, action) => {
       stockSpinner: true
     });
   } else if (action.type === actions.FETCH_STOCK_SUCCESS) {
-    Object.assign({}, state, {
-      stockSpinner: false
-    });
-    return action.stockData
+    return Object.assign({}, state, { stockSpinner: false }, action.stockData);
   }
   return state;
 };
@@ -35,10 +32,7 @@ export const headlineReducer = (state=initialState, action) => {
       headlineSpinner: true
     });
   } else if (action.type === actions.FETCH_HEADLINES_SUCCESS) {
-    Object.assign({}, state, {
-      headlineSpinner: false
-    });
-    return action.stockData
+    return Object.assign({}, state, { headlineSpinner: false }, action.headlineData);
   }
   return state;
 };
