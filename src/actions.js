@@ -1,5 +1,6 @@
-import {API_BASE_URL} from '../config';
 import {parseXml, xml2json} from './converter';
+import moment from 'moment';
+window.DOMParser = require('xmldom').DOMParser;
 
 export const TOGGLE_INFO_MODAL = 'TOGGLE_INFO_MODAL';
 export const toggleInfoModal = () => ({
@@ -18,7 +19,7 @@ export const fetchStockSuccess = stockData => ({
 });
 
 export const fetchStock = (stockSymbol) => dispatch => {
-  fetch(`${API_BASE_URL}/data`, { body: { symbol: stockSymbol } })
+  fetch(`/data`, { body: { symbol: stockSymbol } })
     .then(res => {
       if (!res.ok) {
         return Promise.reject(res.statusText);
@@ -27,7 +28,7 @@ export const fetchStock = (stockSymbol) => dispatch => {
     })
     .then(stockData => {
       const currentTime = moment().format('YYYY[-]MM[-]DD');
-      const startOfWeek = moment().startOf('week').format('YYYY[-]MM[-]DD');
+      //const startOfWeek = moment().startOf('week').format('YYYY[-]MM[-]DD');
       const endOfWeek = moment().endOf("week");
       const prevWeek = endOfWeek.subtract(7, 'days');
       const previousWeek = prevWeek.format('YYYY[-]MM[-]DD');
@@ -43,7 +44,7 @@ export const fetchStock = (stockSymbol) => dispatch => {
       const yearVal = parseFloat(stockData['Weekly Time Series'][prevYear]['4. close']);
 
       const finalStockData = {
-        currentTimeOfQuote: moment.format('MMM D, HH:mm A z');
+        currentTimeOfQuote: moment.format('MMM D, HH:mm A z'),
         currentValue: Math.round(currentVal * 1e2) / 1e2,
         startingValue: Math.round(startingVal * 1e2) / 1e2,
         change: Math.round((currentVal - startingVal) * 1e2) / 1e2,
@@ -52,13 +53,26 @@ export const fetchStock = (stockSymbol) => dispatch => {
         threeMonthValue: Math.round(threeMonthVal * 1e2) / 1e2,
         yearValue: Math.round(yearVal * 1e2) / 1e2
       };
-      
+
       dispatch(fetchStockSuccess(finalStockData));
     });
 };
 
+
+
+export const FETCH_HEADLINES_REQUEST = 'FETCH_HEADLINES_REQUEST';
+export const fetchHeadlinesRequest = () => ({
+    type: FETCH_HEADLINES_REQUEST,
+});
+
+export const FETCH_HEADLINES_SUCCESS = 'FETCH_HEADLINES_SUCCESS';
+export const fetchHeadlinesSuccess = headlineData => ({
+    type: FETCH_HEADLINES_SUCCESS,
+    headlineData
+});
+
 export const fetchHeadlines = (stockSymbol) => dispatch => {
-  fetch(`${API_BASE_URL}/headlines`, { body: { symbol: stockSymbol } })
+  fetch(`/headlines`, { body: { symbol: stockSymbol } })
     .then(res => {
       if (!res.ok) {
         return Promise.reject(res.statusText);
@@ -67,12 +81,12 @@ export const fetchHeadlines = (stockSymbol) => dispatch => {
     })
     .then(headlineData => {
       const parsedXml = parseXml(headlineData);
-      const convertedJson = xml2json(parsedXml, tab);
+      const convertedJson = xml2json(parsedXml);
       let finalHeadlineData = convertedJson.rss.item.slice(0, 5).map(story => ({
         title: story.title,
         link: story.link,
         description: story.description
       }));
-      dispatch(fetchHeadlinesSuccess(finalHeadlineData))
+      dispatch(fetchHeadlinesSuccess(finalHeadlineData));
     }); 
-}
+};

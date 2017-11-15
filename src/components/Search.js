@@ -1,15 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {findStock} from '../actions';
+import {fetchStockRequest, fetchStock} from '../actions';
 
 import '../search.css';
 
 export class Search extends React.Component {
   submitStock(event) {
       event.preventDefault();
+      this.props.dispatch(fetchStockRequest());
       const value = this.input.value;
-      this.props.dispatch(findStock(value));
+      this.props.dispatch(fetchStock(value));
       this.input.value = '';        
   }
 
@@ -26,8 +27,10 @@ export class Search extends React.Component {
   }
 };
 
-const mapStateToProps = state => {
-  return state;
-};
+const mapStateToProps = state => ({
+  stockSpinner: state.stockSpinner,
+  headlineSpinner: state.headlineSpinner,
+  symbol: state.symbol
+});
 
 export default connect(mapStateToProps)(Search);

@@ -1,4 +1,4 @@
-import { TOGGLE_INFO_MODAL, FETCH_STOCK_REQUEST, FETCH_STOCK_SUCCESS } from './actions';
+import * as actions from './actions';
 
 const initialState = {
   stockSpinner: false,
@@ -15,7 +15,30 @@ const initialState = {
   headlines: []
 };
 
-export default (state, action) => {
-  state = state || initialState;
-  if (action.type === FIND_STOCK) {};
+export const stockReducer = (state=initialState, action) => {
+  if (action.type === actions.FETCH_STOCK_REQUEST) {
+    return Object.assign({}, state, {
+      stockSpinner: true
+    });
+  } else if (action.type === actions.FETCH_STOCK_SUCCESS) {
+    Object.assign({}, state, {
+      stockSpinner: false
+    });
+    return action.stockData
+  }
+  return state;
+};
+
+export const headlineReducer = (state=initialState, action) => {
+  if (action.type === actions.FETCH_HEADLINES_REQUEST) {
+    return Object.assign({}, state, {
+      headlineSpinner: true
+    });
+  } else if (action.type === actions.FETCH_HEADLINES_SUCCESS) {
+    Object.assign({}, state, {
+      headlineSpinner: false
+    });
+    return action.stockData
+  }
+  return state;
 };
