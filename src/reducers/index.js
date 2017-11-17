@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import stockReducer from './stockReducer'
-import headlineReducer from './headlineReducer'
+import stock from './stockReducer'
+import headline from './headlineReducer'
 
 export default combineReducers({
-  stockReducer,
-  headlineReducer
-})
+  stock,
+  headline
+});

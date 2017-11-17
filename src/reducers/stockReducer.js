@@ -13,7 +13,7 @@ const initialState = {
   yearValue: null,
 };
 
-export default function stockReducer(state=initialState, action) {
+export default function stock(state=initialState, action) {
   if (action.type === actions.FETCH_STOCK_REQUEST) {
     return Object.assign({}, state, {
       stockSpinner: true

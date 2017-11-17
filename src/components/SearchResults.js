@@ -3,38 +3,44 @@ import {connect} from 'react-redux';
 
 //import '../searchresults.css';
 
-export function SearchResults(props) {
-  if (props.stockSpinner) {
-    return (
-      <div>
-        <img src="../../public/loading.gif" alt="Loading"/>
-      </div>
-    );
+export class SearchResults extends React.Component {
+  render() {
+    if (!this.props.symbol) {
+      return (<div></div>);
+    } else if (this.props.stockSpinner) {
+      return (
+        <div>
+          <img src="../../public/loading.gif" alt="Loading"/>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h2>{this.props.symbol} Stock Information</h2>
+          <h3>Current Value: {this.props.currentValue} USD</h3>
+          <h4>Today's Change: {this.props.change}</h4>
+          <span>{this.props.currentTimeOfQuote}</span>
+          <p>Value at Beginning of Week: {this.props.weekStartingValue}</p>
+          <p>Value 1 Month Ago: {this.props.oneMonthValue}</p>
+          <p>Value 3 Months Ago: {this.props.threeMonthValue}</p>
+          <p>Value 1 Year Ago: {this.props.yearValue}</p>
+        </div>
+      );
+    }
   }
-  return (
-    <div>
-      <h2>{props.symbol} Stock Information</h2>
-      <h3>Current Value: {props.currentValue} USD</h3>
-      <h4>Today's Change: {props.change}</h4>
-      <span>{props.currentTimeOfQuote}</span>
-      <p>Value at Beginning of Week: {props.weekStartingValue}</p>
-      <p>Value 1 Month Ago: {props.oneMonthValue}</p>
-      <p>Value 3 Months Ago: {props.threeMonthValue}</p>
-      <p>Value 1 Year Ago: {props.yearValue}</p>
-    </div>
-  );
 }
 
 const mapStateToProps = state => ({
-  symbol: state.symbol,
-  currentTimeOfQuote: state.currentTimeOfQuote,
-  currentValue: state.currentValue,
-  startingValue: state.startingValue,
-  change: state.change,
-  weekStartingValue: state.weekStartingValue,
-  oneMonthValue: state.oneMonthValue,
-  threeMonthValue: state.threeMonthValue,
-  yearValue: state.yearValue,
+  symbol: state.stock.symbol,
+  stockSpinner: state.stock.stockSpinner,
+  currentTimeOfQuote: state.stock.currentTimeOfQuote,
+  currentValue: state.stock.currentValue,
+  startingValue: state.stock.startingValue,
+  change: state.stock.change,
+  weekStartingValue: state.stock.weekStartingValue,
+  oneMonthValue: state.stock.oneMonthValue,
+  threeMonthValue: state.stock.threeMonthValue,
+  yearValue: state.stock.yearValue,
 });
 
 export default connect(mapStateToProps)(SearchResults);

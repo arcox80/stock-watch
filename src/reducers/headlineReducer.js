@@ -5,7 +5,7 @@ const initialState = {
   headlines: []
 };
 
-export default function headlineReducer(state=initialState, action) {
+export default function headline(state=initialState, action) {
   if (action.type === actions.FETCH_HEADLINES_REQUEST) {
     return Object.assign({}, state, {
       headlineSpinner: true
