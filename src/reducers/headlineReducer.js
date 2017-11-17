@@ -11,7 +11,9 @@ export default function headline(state=initialState, action) {
       headlineSpinner: true
     });
   } else if (action.type === actions.FETCH_HEADLINES_SUCCESS) {
-    return Object.assign({}, state, { headlineSpinner: false }, action.headlineData);
+    return Object.assign({}, state, { headlineSpinner: false }, {
+      headlines: [action.headlineData] 
+    });
   }
   return state;
 };
