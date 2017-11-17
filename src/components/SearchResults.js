@@ -13,6 +13,12 @@ export class SearchResults extends React.Component {
           <img src="../../public/loading.gif" alt="Loading"/>
         </div>
       );
+    } else if (this.props.stockFail) {
+      return (
+        <div>
+          <p>Sorry, the Alpha Vantage API is down right now. Please try again later.</p>
+        </div>
+      );
     } else {
       return (
         <div>
@@ -33,6 +39,7 @@ export class SearchResults extends React.Component {
 const mapStateToProps = state => ({
   symbol: state.stock.symbol,
   stockSpinner: state.stock.stockSpinner,
+  stockFail: state.stock.stockFail,
   currentTimeOfQuote: state.stock.currentTimeOfQuote,
   currentValue: state.stock.currentValue,
   startingValue: state.stock.startingValue,

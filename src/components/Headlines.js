@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Article from './article';
+import Article from './Article';
 
 //import '../headlines.css';
 
@@ -14,13 +14,20 @@ export function Headlines(props) {
         <img src="../../public/loading.gif" alt="Loading"/>
       </div>
     );
+  } else if (props.headlinesFail) {
+    return (
+      <div>
+        <p>Unable to retrieve any headlines. Please make sure you entered a valid ticker symbol.</p>
+        <p>If you did enter a valid ticker symbol, then the Yahoo! API is down right now. Please try again later.</p>
+      </div>
+    );
   } else {
     const listItems = props.headlines.map((article, index) =>
     <Article key={index} {...article} />
     );
     return (
       <div>
-        <h2>Recent News for {this.props.symbol}</h2>
+        <h2>Recent News for {props.symbol}</h2>
         {listItems}
       </div>
     );
@@ -29,7 +36,8 @@ export function Headlines(props) {
 
 const mapStateToProps = state => ({
   symbol: state.stock.symbol,
-  stockSpinner: state.headline.headlineSpinner,
+  headlineSpinner: state.headline.headlineSpinner,
+  headlinesFail: state.headline.headlinesFail,
   headlines: state.headline.headlines
 });
 

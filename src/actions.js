@@ -18,6 +18,11 @@ export const fetchStockSuccess = stockData => ({
     stockData
 });
 
+export const FETCH_STOCK_FAIL = 'FETCH_STOCK_FAIL';
+export const fetchStockFail = () => ({
+  type: FETCH_STOCK_FAIL
+});
+
 export const fetchStock = (stockSymbol) => dispatch => {
   fetch(`/data/${stockSymbol}`)
     .then(res => {
@@ -27,6 +32,9 @@ export const fetchStock = (stockSymbol) => dispatch => {
       return res.json();
     })
     .then(stockData => {
+      if (stockData['Error Message']) {
+        dispatch(fetchStockFail());
+      }
       console.log(stockData);
       const currentTime = moment().format('YYYY[-]MM[-]DD');
       const endOfWeek = moment().endOf("week");
@@ -73,8 +81,13 @@ export const fetchHeadlinesSuccess = headlineData => ({
     headlineData
 });
 
+export const FETCH_HEADLINES_FAIL = 'FETCH_HEADLINES_FAIL';
+export const fetchHeadlinesFail = () => ({
+    type: FETCH_HEADLINES_FAIL
+});
+
 export const fetchHeadlines = (stockSymbol) => dispatch => {
-  fetch(`/headlines`, { body: { symbol: stockSymbol } })
+  fetch(`/headlines/${stockSymbol}`)
     .then(res => {
       if (!res.ok) {
         return Promise.reject(res.statusText);
@@ -84,7 +97,11 @@ export const fetchHeadlines = (stockSymbol) => dispatch => {
     .then(headlineData => {
       const parsedXml = parseXml(headlineData);
       const convertedJson = xml2json(parsedXml);
-      let finalHeadlineData = convertedJson.rss.item.slice(0, 5).map(story => ({
+      const finalJson = JSON.parse(convertedJson.replace('undefined', ''));
+      if (!finalJson.rss.channel.item) {
+        dispatch(fetchHeadlinesFail());
+      }
+      let finalHeadlineData = finalJson.rss.channel.item.slice(0, 5).map(story => ({
         title: story.title,
         link: story.link,
         description: story.description

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {fetchStockRequest, fetchStock} from '../actions';
+import {fetchStockRequest, fetchStock, fetchHeadlinesRequest, fetchHeadlines} from '../actions';
 
 import '../search.css';
 
@@ -9,9 +9,10 @@ export class Search extends React.Component {
   submitStock(event) {
       event.preventDefault();
       this.props.dispatch(fetchStockRequest());
+      this.props.dispatch(fetchHeadlinesRequest());
       let value = event.target.querySelector('input').value;
-      console.log(value);
       this.props.dispatch(fetchStock(value));
+      this.props.dispatch(fetchHeadlines(value));
       value = '';        
   }
 
