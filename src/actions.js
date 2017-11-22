@@ -36,14 +36,21 @@ export const fetchStock = (stockSymbol) => dispatch => {
         dispatch(fetchStockFail());
       }
       console.log(stockData);
-      const currentTime = moment().format('YYYY[-]MM[-]DD');
+      const now = moment();
+      let currentTime;
+      if (moment().day() === 7) {
+        currentTime = now.subtract(1, 'days').format('YYYY[-]MM[-]DD');
+      } else if (moment().day() === 0) {
+        currentTime = now.subtract(2, 'days').format('YYYY[-]MM[-]DD');
+      } else {
+        currentTime = now.format('YYYY[-]MM[-]DD');
+      }
       const endOfWeek = moment().endOf("week");
       const prevWeek = endOfWeek.subtract(8, 'days');
       const previousWeek = prevWeek.format('YYYY[-]MM[-]DD');
       const prevMonth = prevWeek.subtract(4, 'weeks').format('YYYY[-]MM[-]DD');
       const prev3Month = prevWeek.subtract(12, 'weeks').format('YYYY[-]MM[-]DD');
       const prevYear = prevWeek.subtract(52, 'weeks').format('YYYY[-]MM[-]DD');
-
       const currentVal = parseFloat(stockData['Weekly Time Series'][currentTime]['4. close']);
       const startingVal = parseFloat(stockData['Weekly Time Series'][currentTime]['1. open']);
       const changeVal = currentVal - startingVal;
