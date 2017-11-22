@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Article from './Article';
 
-//import '../headlines.css';
+import './headlines.css';
 
 export function Headlines(props) {
   if (props.headlines.length === 0) {
@@ -11,7 +11,7 @@ export function Headlines(props) {
     return (
       <div>
         <h2>Recent News for {props.symbol}</h2>
-        <img src="../../public/loading.gif" alt="Loading"/>
+        <img className="spinner" src="../../public/loading.gif" alt="Loading"/>
       </div>
     );
   } else if (props.headlinesFail) {

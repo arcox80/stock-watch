@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-//import '../searchresults.css';
+import './searchresults.css';
 
 export class SearchResults extends React.Component {
   render() {
@@ -10,7 +10,8 @@ export class SearchResults extends React.Component {
     } else if (this.props.stockSpinner) {
       return (
         <div>
-          <img src="../../public/loading.gif" alt="Loading"/>
+          <h2>{this.props.symbol} Stock Information</h2>
+          <img className="spinner" src="../../public/loading.gif" alt="Loading"/>
         </div>
       );
     } else if (this.props.stockFail) {
