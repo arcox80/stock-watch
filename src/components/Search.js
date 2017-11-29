@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {fetchStockRequest, fetchStock, fetchHeadlinesRequest, fetchHeadlines} from '../actions';
 
-import '../search.css';
+import './search.css';
 
 export class Search extends React.Component {
   submitStock(event) {
