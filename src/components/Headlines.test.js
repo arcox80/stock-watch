@@ -16,7 +16,7 @@ describe('<Headlines />', () => {
 
   it('Renders a spinner when headlineSpinner is true', () => {
     const wrapper = shallow(<Headlines />);
-    wrapper.setProps({ symbol: 'IBM', headlineSpinner: true });
+    wrapper.setProps({ symbol: 'IBM', headlineSpinner: true, headlines: [] });
     expect(wrapper.find('h2').text()).toEqual(`Recent News for ${props.symbol}`);
     expect(wrapper.find('img').hasClass('spinner')).toEqual(true);
   });
