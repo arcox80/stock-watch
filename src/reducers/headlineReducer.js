@@ -3,7 +3,7 @@ import * as actions from '../actions';
 const initialState = {
   headlineSpinner: false,
   headlinesFail: false,
-  headlines: []
+  headlines: null
 };
 
 export default function headline(state=initialState, action) {

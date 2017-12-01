@@ -6,7 +6,7 @@ import './headlines.css';
 
 export class Headlines extends React.Component{
   render() {
-    if (this.props.headlines.length === 0) {
+    if (!this.props.headlines) {
       return (<div></div>);
     } else if (this.props.headlineSpinner) {
       return (

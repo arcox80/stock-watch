@@ -30,9 +30,9 @@ export class Search extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  stockSpinner: state.stockSpinner,
-  headlineSpinner: state.headlineSpinner,
-  symbol: state.symbol
+  stockSpinner: state.stock.stockSpinner,
+  headlineSpinner: state.headline.headlineSpinner,
+  symbol: state.stock.symbol
 });
 
 export default connect(mapStateToProps)(Search);
