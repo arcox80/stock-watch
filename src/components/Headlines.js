@@ -1,8 +1,8 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import Article from './Article';
+import React from "react";
+import {connect} from "react-redux";
+import Article from "./Article";
 
-import './headlines.css';
+import "./headlines.css";
 
 export class Headlines extends React.Component{
   render() {
@@ -24,7 +24,7 @@ export class Headlines extends React.Component{
       );
     } else {
       const listItems = this.props.headlines.map((article, index) =>
-      <Article key={index} {...article} />
+        <Article key={index} {...article} />
       );
       return (
         <div>

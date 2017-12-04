@@ -13,7 +13,7 @@ describe('stockReducer', () => {
             state.weekStartingValue &&
             state.oneMonthValue &&
             state.yearValue
-          ).toEqual(null);
+    ).toEqual(null);
   });
 
   it('Should return the current state on an unknown action', () => {
