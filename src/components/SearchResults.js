@@ -1,7 +1,7 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React from "react";
+import {connect} from "react-redux";
 
-import './searchresults.css';
+import "./searchresults.css";
 
 export class SearchResults extends React.Component {
   render() {

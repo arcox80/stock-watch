@@ -8,8 +8,9 @@ export const toggleInfoModal = () => ({
 });
 
 export const FETCH_STOCK_REQUEST = "FETCH_STOCK_REQUEST";
-export const fetchStockRequest = () => ({
-  type: FETCH_STOCK_REQUEST
+export const fetchStockRequest = value => ({
+  type: FETCH_STOCK_REQUEST,
+  value
 });
 
 export const FETCH_STOCK_SUCCESS = "FETCH_STOCK_SUCCESS";
@@ -29,13 +30,13 @@ export const fetchStock = (stockSymbol) => dispatch => {
       if (!res.ok) {
         return Promise.reject(res.statusText);
       }
+
       return res.json();
     })
     .then(stockData => {
       if (stockData["Error Message"]) {
         dispatch(fetchStockFail());
       }
-      console.log(stockData);
       const now = moment();
       let currentTime;
       if (moment().day() === 7) {
@@ -60,7 +61,6 @@ export const fetchStock = (stockSymbol) => dispatch => {
       const yearVal = parseFloat(stockData["Weekly Time Series"][prevYear]["4. close"]);
 
       const finalStockData = {
-        symbol: stockData["Meta Data"]["2. Symbol"].toUpperCase(),
         currentTimeOfQuote: moment().format("MMM D, h:mm A z"),
         currentValue: currentVal.toFixed(2),
         startingValue: startingVal.toFixed(2),
@@ -72,6 +72,9 @@ export const fetchStock = (stockSymbol) => dispatch => {
       };
 
       dispatch(fetchStockSuccess(finalStockData));
+    })
+    .catch(() => { 
+      dispatch(fetchStockFail()); 
     });
 };
 
@@ -114,5 +117,8 @@ export const fetchHeadlines = (stockSymbol) => dispatch => {
         description: story.description
       }));
       dispatch(fetchHeadlinesSuccess(finalHeadlineData));
+    })
+    .catch(() => { 
+      dispatch(fetchHeadlinesFail()); 
     }); 
 };

@@ -17,9 +17,6 @@ const prevMonth = prevWeek.subtract(4, "weeks").format("YYYY[-]MM[-]DD");
 const prev3Month = prevWeek.subtract(12, "weeks").format("YYYY[-]MM[-]DD");
 const prevYear = prevWeek.subtract(52, "weeks").format("YYYY[-]MM[-]DD");
 const stockData = {
-  "Meta Data": {
-    "2. Symbol": "IBM"
-  }, 
   "Weekly Time Series": {
     [now]: {
       "1. open": "83.3100",
@@ -116,7 +113,6 @@ describe("fetchStock", () => {
     );
 
     const finalStockData = {
-      symbol: stockData["Meta Data"]["2. Symbol"].toUpperCase(),
       currentTimeOfQuote: moment().format("MMM D, h:mm A z"),
       currentValue: parseFloat(stockData["Weekly Time Series"][now]["4. close"]).toFixed(2),
       startingValue: parseFloat(stockData["Weekly Time Series"][now]["1. open"]).toFixed(2),

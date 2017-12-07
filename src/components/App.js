@@ -1,8 +1,8 @@
-import React from 'react';
-import './App.css';
-import Search from './Search';
-import SearchResults from './SearchResults';
-import Headlines from './Headlines';
+import React from "react";
+import "./App.css";
+import Search from "./Search";
+import SearchResults from "./SearchResults";
+import Headlines from "./Headlines";
 
 export default function App(props) {
   return (
@@ -16,4 +16,4 @@ export default function App(props) {
       <footer className="App-footer"></footer>
     </div>
   );
-};
+}

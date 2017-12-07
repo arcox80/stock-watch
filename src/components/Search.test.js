@@ -3,26 +3,26 @@ import {shallow, mount} from "enzyme";
 import {Search} from "./Search";
 import {fetchStockRequest, fetchHeadlinesRequest} from "../actions";
 
-const mockFetchStockAction = {
+const mockFetchStock = {
   type: "FETCH_STOCK"
 };
 jest.mock("../actions", () => Object.assign({},
   require.requireActual("../actions"),
   {
     fetchStock: jest.fn().mockImplementation(() => {
-      return mockFetchStockAction;
+      return mockFetchStock;
     })
   }
 ));
 
-const mockFetchHeadlinesAction = {
+const mockFetchHeadlines = {
   type: "FETCH_HEADLINES"
 };
 jest.mock("../actions", () => Object.assign({},
   require.requireActual("../actions"),
   {
     fetchHeadlines: jest.fn().mockImplementation(() => {
-      return mockFetchHeadlinesAction;
+      return mockFetchHeadlines;
     })
   }
 ));
@@ -39,7 +39,7 @@ describe("<Search />", () => {
     wrapper.find('input[type="text"]').instance().value = value;
     wrapper.find("form").simulate("submit");
     expect(dispatch).toHaveBeenCalledWith(
-      mockFetchHeadlinesAction, mockFetchStockAction, fetchHeadlinesRequest(), fetchStockRequest()
+      mockFetchStock, mockFetchHeadlines, fetchHeadlinesRequest(), fetchStockRequest()
     );
   });
   
