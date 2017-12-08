@@ -7,6 +7,7 @@ export const toggleInfoModal = () => ({
   type: TOGGLE_INFO_MODAL
 });
 
+//Actions Related to the Alpha Vantage API
 export const FETCH_STOCK_REQUEST = "FETCH_STOCK_REQUEST";
 export const fetchStockRequest = value => ({
   type: FETCH_STOCK_REQUEST,
@@ -25,12 +26,12 @@ export const fetchStockFail = () => ({
 });
 
 export const fetchStock = (stockSymbol) => dispatch => {
+  dispatch(fetchStockRequest(stockSymbol));
   return fetch(`/data/${stockSymbol}`)
     .then(res => {
       if (!res.ok) {
         return Promise.reject(res.statusText);
       }
-
       return res.json();
     })
     .then(stockData => {
@@ -78,8 +79,7 @@ export const fetchStock = (stockSymbol) => dispatch => {
     });
 };
 
-
-
+//Actions Related to the Yahoo Finance API
 export const FETCH_HEADLINES_REQUEST = "FETCH_HEADLINES_REQUEST";
 export const fetchHeadlinesRequest = () => ({
   type: FETCH_HEADLINES_REQUEST,
@@ -97,6 +97,7 @@ export const fetchHeadlinesFail = () => ({
 });
 
 export const fetchHeadlines = (stockSymbol) => dispatch => {
+  dispatch(fetchHeadlinesRequest());
   return fetch(`/headlines/${stockSymbol}`)
     .then(res => {
       if (!res.ok) {

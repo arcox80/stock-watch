@@ -1,31 +1,7 @@
 import React from "react";
 import {shallow, mount} from "enzyme";
 import {Search} from "./Search";
-import {fetchStockRequest, fetchHeadlinesRequest} from "../actions";
-
-const mockFetchStock = {
-  type: "FETCH_STOCK"
-};
-jest.mock("../actions", () => Object.assign({},
-  require.requireActual("../actions"),
-  {
-    fetchStock: jest.fn().mockImplementation(() => {
-      return mockFetchStock;
-    })
-  }
-));
-
-const mockFetchHeadlines = {
-  type: "FETCH_HEADLINES"
-};
-jest.mock("../actions", () => Object.assign({},
-  require.requireActual("../actions"),
-  {
-    fetchHeadlines: jest.fn().mockImplementation(() => {
-      return mockFetchHeadlines;
-    })
-  }
-));
+import * as actions from "../actions";
 
 describe("<Search />", () => {
   it("Renders without crashing", () => {
@@ -34,13 +10,16 @@ describe("<Search />", () => {
 
   it("It should fire the dispatches when the form is submitted", () => {
     const dispatch = jest.fn();
+    const stockSpy = jest.spyOn(actions, "fetchStock");
+    const headlinesSpy = jest.spyOn(actions, "fetchHeadlines");
     const wrapper = mount(<Search dispatch={dispatch} />);
     const value = "ibm";
     wrapper.find('input[type="text"]').instance().value = value;
     wrapper.find("form").simulate("submit");
-    expect(dispatch).toHaveBeenCalledWith(
-      mockFetchStock, mockFetchHeadlines, fetchHeadlinesRequest(), fetchStockRequest()
-    );
+    expect(dispatch).toHaveBeenCalled();
+    expect(stockSpy).toHaveBeenCalledWith(value);
+    expect(headlinesSpy).toHaveBeenCalledWith(value);
+    //expect(dispatch).toHaveBeenCalledWith(fetchStock(value), fetchHeadlines(value));
   });
   
   it("Should reset the input when the form is submitted", () => {
