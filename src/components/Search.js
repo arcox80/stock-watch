@@ -22,8 +22,8 @@ export class Search extends React.Component {
     return (
       <form onSubmit={this.submitStock}>
         <input type="text" name="userSearch" id="userSearch"
-          className="text" autoComplete="off"
-          placeholder="Enter the Company's Stock Symbol" required
+          className="text" autoComplete="off" maxLength="5"
+          placeholder="Enter the Company's Stock Symbol" required 
         />
         <input type="submit" id="searchButton" className="button" name="submit" value="Submit"/>
       </form>

@@ -12,11 +12,12 @@ const initialState = {
   oneMonthValue: null,
   threeMonthValue: null,
   yearValue: null,
+  error: null
 };
 
 export default function stock(state=initialState, action) {
   if (action.type === actions.FETCH_STOCK_REQUEST) {
-    return Object.assign({}, state, { stockSpinner: true, symbol: action.value.toUpperCase() });
+    return Object.assign({}, initialState, { stockSpinner: true, symbol: action.value.toUpperCase() });
   } else if (action.type === actions.FETCH_STOCK_FAIL) {
     return Object.assign({}, state, { stockFail: true, stockSpinner: false });
   } else if (action.type === actions.FETCH_STOCK_SUCCESS) {

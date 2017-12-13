@@ -8,7 +8,7 @@ const initialState = {
 
 export default function headline(state=initialState, action) {
   if (action.type === actions.FETCH_HEADLINES_REQUEST) {
-    return Object.assign({}, state, { headlineSpinner: true });
+    return Object.assign({}, initialState, { headlineSpinner: true });
   } else if (action.type === actions.FETCH_HEADLINES_FAIL) {
     return Object.assign({}, state, { headlinesFail: true, headlineSpinner: false });
   } else if (action.type === actions.FETCH_HEADLINES_SUCCESS) {

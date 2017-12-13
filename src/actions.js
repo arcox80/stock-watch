@@ -1,5 +1,5 @@
 import {parseXml, xml2json} from "./converter";
-import moment from "moment";
+import moment from "moment-timezone";
 window.DOMParser = require("xmldom").DOMParser;
 
 export const TOGGLE_INFO_MODAL = "TOGGLE_INFO_MODAL";
@@ -36,25 +36,37 @@ export const fetchStock = (stockSymbol) => dispatch => {
     })
     .then(stockData => {
       if (stockData["Error Message"]) {
-        dispatch(fetchStockFail());
+        const data = {
+          error: [
+            "I'm sorry, but we were unable to retrieve your quote. Please make sure you entered a valid ticker symbol.",
+            "If you did enter a valid ticker symbol, then the Alpha Vantage API is down right now. Please try again later."
+          ]
+        };
+        return dispatch(fetchStockSuccess(data));
       }
-      const now = moment();
-      let currentTime;
-      if (moment().day() === 7) {
-        currentTime = now.subtract(1, "days").format("YYYY[-]MM[-]DD");
-      } else if (moment().day() === 0) {
-        currentTime = now.subtract(2, "days").format("YYYY[-]MM[-]DD");
+      const before = moment("00:00:00", "HH:mm:ss");
+      const after = moment("09:30:00", "HH:mm:ss");
+      let originalTime = moment().tz("America/New_York");
+      let formattedTime;
+      if (originalTime.isBetween(before, after, [])) {
+        formattedTime = originalTime.subtract(1, "days");
+        formattedTime.hour(23);
+      }
+      if (originalTime.day() === 7) {
+        formattedTime = originalTime.subtract(1, "days").format("YYYY[-]MM[-]DD");
+      } else if (originalTime.day() === 0) {
+        formattedTime = originalTime.subtract(2, "days").format("YYYY[-]MM[-]DD");
       } else {
-        currentTime = now.format("YYYY[-]MM[-]DD");
+        formattedTime = originalTime.format("YYYY[-]MM[-]DD");
       }
-      const endOfWeek = moment().endOf("week");
+      const endOfWeek = originalTime.endOf("week");
       const prevWeek = endOfWeek.subtract(8, "days");
       const previousWeek = prevWeek.format("YYYY[-]MM[-]DD");
       const prevMonth = prevWeek.subtract(4, "weeks").format("YYYY[-]MM[-]DD");
       const prev3Month = prevWeek.subtract(12, "weeks").format("YYYY[-]MM[-]DD");
       const prevYear = prevWeek.subtract(52, "weeks").format("YYYY[-]MM[-]DD");
-      const currentVal = parseFloat(stockData["Weekly Time Series"][currentTime]["4. close"]);
-      const startingVal = parseFloat(stockData["Weekly Time Series"][currentTime]["1. open"]);
+      const currentVal = parseFloat(stockData["Weekly Time Series"][formattedTime]["4. close"]);
+      const startingVal = parseFloat(stockData["Weekly Time Series"][formattedTime]["1. open"]);
       const changeVal = currentVal - startingVal;
       const weekStartVal = parseFloat(stockData["Weekly Time Series"][previousWeek]["4. close"]);
       const oneMonthVal = parseFloat(stockData["Weekly Time Series"][prevMonth]["4. close"]);
@@ -62,7 +74,7 @@ export const fetchStock = (stockSymbol) => dispatch => {
       const yearVal = parseFloat(stockData["Weekly Time Series"][prevYear]["4. close"]);
 
       const finalStockData = {
-        currentTimeOfQuote: moment().format("MMM D, h:mm A z"),
+        currentTimeOfQuote: originalTime.format("MMM D, h:mm A z"),
         currentValue: currentVal.toFixed(2),
         startingValue: startingVal.toFixed(2),
         change: changeVal.toFixed(2),
@@ -72,10 +84,11 @@ export const fetchStock = (stockSymbol) => dispatch => {
         yearValue: yearVal.toFixed(2)
       };
 
-      dispatch(fetchStockSuccess(finalStockData));
+      return dispatch(fetchStockSuccess(finalStockData));
     })
-    .catch(() => { 
-      dispatch(fetchStockFail()); 
+    .catch(error => {
+      console.log(error);
+      dispatch(fetchStockFail());
     });
 };
 

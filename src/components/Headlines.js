@@ -6,7 +6,7 @@ import "./headlines.css";
 
 export class Headlines extends React.Component{
   render() {
-    if (!this.props.headlines) {
+    if (!this.props.headlines && !this.props.headlinesFail) {
       return (<div></div>);
     } else if (this.props.headlineSpinner) {
       return (
@@ -18,7 +18,8 @@ export class Headlines extends React.Component{
     } else if (this.props.headlinesFail) {
       return (
         <div>
-          <p>Unable to retrieve any headlines. Please make sure you entered a valid ticker symbol.</p>
+          <h2>Recent News for {this.props.symbol}</h2>
+          <p>I'm sorry, but we were unable to retrieve any headlines. Please make sure you entered a valid ticker symbol.</p>
           <p>If you did enter a valid ticker symbol, then the Yahoo! API is down right now. Please try again later.</p>
         </div>
       );

@@ -7,10 +7,11 @@ import {
   FETCH_HEADLINES_FAIL, fetchHeadlinesFail,
   fetchStock, fetchHeadlines
 } from "./actions";
-import moment from "moment";
+import moment from "moment-timezone";
 
-const now = moment().format("YYYY[-]MM[-]DD");
-const endOfWeek = moment().endOf("week");
+const originalTime = moment().tz("America/New_York");
+const formattedTime = originalTime.format("YYYY[-]MM[-]DD");
+const endOfWeek = originalTime.endOf("week");
 const prevWeek = endOfWeek.subtract(8, "days");
 const previousWeek = prevWeek.format("YYYY[-]MM[-]DD");
 const prevMonth = prevWeek.subtract(4, "weeks").format("YYYY[-]MM[-]DD");
@@ -18,7 +19,7 @@ const prev3Month = prevWeek.subtract(12, "weeks").format("YYYY[-]MM[-]DD");
 const prevYear = prevWeek.subtract(52, "weeks").format("YYYY[-]MM[-]DD");
 const stockData = {
   "Weekly Time Series": {
-    [now]: {
+    [formattedTime]: {
       "1. open": "83.3100",
       "4. close": "83.8850"
     },
@@ -57,8 +58,10 @@ const headlineData = `
 
 describe("fetchStockRequest", () => {
   it("Should return the action", () => {
-    const action = fetchStockRequest();
+    const value = "ibm";
+    const action = fetchStockRequest(value);
     expect(action.type).toEqual(FETCH_STOCK_REQUEST);
+    expect(action.value).toEqual(value);
   });
 });
 
@@ -113,9 +116,9 @@ describe("fetchStock", () => {
     );
 
     const finalStockData = {
-      currentTimeOfQuote: moment().format("MMM D, h:mm A z"),
-      currentValue: parseFloat(stockData["Weekly Time Series"][now]["4. close"]).toFixed(2),
-      startingValue: parseFloat(stockData["Weekly Time Series"][now]["1. open"]).toFixed(2),
+      currentTimeOfQuote: originalTime.format("MMM D, h:mm A z"),
+      currentValue: parseFloat(stockData["Weekly Time Series"][formattedTime]["4. close"]).toFixed(2),
+      startingValue: parseFloat(stockData["Weekly Time Series"][formattedTime]["1. open"]).toFixed(2),
       weekStartingValue: parseFloat(stockData["Weekly Time Series"][previousWeek]["4. close"]).toFixed(2),
       oneMonthValue: parseFloat(stockData["Weekly Time Series"][prevMonth]["4. close"]).toFixed(2),
       threeMonthValue: parseFloat(stockData["Weekly Time Series"][prev3Month]["4. close"]).toFixed(2),

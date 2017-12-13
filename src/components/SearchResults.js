@@ -20,6 +20,14 @@ export class SearchResults extends React.Component {
           <p>Sorry, the Alpha Vantage API is down right now. Please try again later.</p>
         </div>
       );
+    } else if (this.props.error) {
+      return (
+        <div>
+          <h2>{this.props.symbol} Stock Information</h2>
+          <p>{this.props.error[0]}</p>
+          <p>{this.props.error[1]}</p>
+        </div>
+      );
     } else {
       return (
         <div>
@@ -49,6 +57,7 @@ const mapStateToProps = state => ({
   oneMonthValue: state.stock.oneMonthValue,
   threeMonthValue: state.stock.threeMonthValue,
   yearValue: state.stock.yearValue,
+  error: state.stock.error
 });
 
 export default connect(mapStateToProps)(SearchResults);
