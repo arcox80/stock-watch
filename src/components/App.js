@@ -4,13 +4,12 @@ import Search from "./Search";
 import SearchResults from "./SearchResults";
 import Headlines from "./Headlines";
 import Footer from "./Footer";
+import Header from "./Header";
 
 export default function App(props) {
   return (
     <div className="App">
-      <header className="App-header">
-        <span className="App-title">$tock-Watch</span>
-      </header>
+      <Header />
       <main>
         <Search />
         <SearchResults />

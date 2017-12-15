@@ -1,7 +1,7 @@
 import React from "react";
 import "./footer.css";
 
-export default function Article(props) {
+export default function Footer(props) {
   return (
     <footer>
       <p className="grid-1"><a class="logo" href="#">$tock-Watch</a></p>
