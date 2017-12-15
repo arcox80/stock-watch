@@ -17,15 +17,24 @@ export class SearchResults extends React.Component {
     } else if (this.props.stockFail) {
       return (
         <div>
-          <p>Sorry, the Alpha Vantage API is down right now. Please try again later.</p>
+          <h2 className="stock-heading" style={{ marginBottom: 10 }}>
+            {this.props.symbol} Stock Information
+          </h2>
+          <div className="error">
+            <p>Sorry, the Alpha Vantage API is down right now. Please try again later.</p>
+          </div>
         </div>
       );
     } else if (this.props.error) {
       return (
         <div>
-          <h2 className="stock-heading">{this.props.symbol} Stock Information</h2>
-          <p>{this.props.error[0]}</p>
-          <p>{this.props.error[1]}</p>
+          <h2 className="stock-heading" style={{ marginBottom: 10 }}>
+            {this.props.symbol} Stock Information
+          </h2>
+          <div className="error">
+            <p>{this.props.error[0]}</p>
+            <p>{this.props.error[1]}</p>
+          </div>
         </div>
       );
     } else {

@@ -19,8 +19,10 @@ export class Headlines extends React.Component{
       return (
         <div>
           <h2 className="headlines-heading">Recent News for {this.props.symbol}</h2>
-          <p>I'm sorry, but we were unable to retrieve any headlines. Please make sure you entered a valid ticker symbol.</p>
-          <p>If you did enter a valid ticker symbol, then the Yahoo! API is down right now. Please try again later.</p>
+          <div className="error">
+            <p>I'm sorry, but we were unable to retrieve any headlines. Please make sure you entered a valid ticker symbol.</p>
+            <p>If you did enter a valid ticker symbol, then the Yahoo! API is down right now. Please try again later.</p>
+          </div>
         </div>
       );
     } else {

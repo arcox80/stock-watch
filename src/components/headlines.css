@@ -1,6 +1,8 @@
 img.spinner {
   width: 50px;
   margin-top: 20px;
+  display: block;
+  margin: 0 auto;
 }
 
 div.headlines {

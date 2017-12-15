@@ -9,7 +9,7 @@ export default function App(props) {
   return (
     <div className="App">
       <header className="App-header">
-        <span className="App-title">Stock-Watch</span>
+        <span className="App-title">$tock-Watch</span>
       </header>
       <main>
         <Search />

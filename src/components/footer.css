@@ -1,16 +1,60 @@
 footer {
   background-color: rgb(33, 108, 42);
-  position: absolute;
   width: 100%;
   min-height: 100px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  align-self: flex-end;
+  order: 99;
+  margin-top: 20px;
+  display: grid;
+  grid-auto-columns: minmax(300, auto);
+  text-align: center;
+  padding: 10px;
 }
-/*
+
+footer a {
+  color: rgb(61, 218, 120);
+}
+
+footer p, div {
+  margin-bottom: 0;
+}
+
+a.logo {
+  color: white;
+  text-decoration: none;
+}
+
+div.grid-3 > p {
+  margin-bottom: 3px;
+}
+
+.fa-linkedin:hover, .fa-github:hover {
+  color: rgb(27, 252, 54);
+}
+
+p.grid-1 {
+  margin-top: 0;
+  font-size: 1.8rem;
+}
+
 @media only screen and (min-width: 768px) {
   footer {
-    bottom: 0;
+    grid-template-columns: 1fr 1fr;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  p.grid-2 {
+    margin-top: 10px;
+  }
+
+  p.grid-5 {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  p.grid-6 {
+    grid-column: 2;
+    margin-top: 0;
   }
 }
-*/
