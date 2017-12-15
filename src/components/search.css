@@ -1,0 +1,36 @@
+/*
+div.search-container {
+  background: url("./wallstreet.jpeg") no-repeat center center;
+  background-size: cover;
+  height: 200px;
+  width: 100%;
+  position: absolute;
+}
+*/
+
+form {
+  max-width: 270px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input[type="text"] {
+  border: 1px solid rgb(33, 108, 42);
+  border-radius: 4px;
+  background-color: rgb(177, 208, 181);
+  width: 197px;
+  margin-top: 5px;
+  margin-right: 3px;
+  padding: 2px 5px;
+}
+
+input[type="submit"] {
+  border: 1px solid rgb(33, 108, 42);
+  border-radius: 4px;
+  padding-top: 2px;
+  background-color: rgb(27, 187, 46);
+  color: #ffffff;
+}
+label {
+  text-align: center;
+}

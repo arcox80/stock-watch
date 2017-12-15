@@ -1,23 +1,22 @@
-.App {
+
+Div.App {
+  padding-bottom:60px;
+}
+
+header {
+  background-color: rgb(33, 108, 42);
+  border-bottom: 1px solid rgb(24, 82, 31);
+  padding: 5px 10px;
+  font-size: 2rem;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
+main {
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
 }

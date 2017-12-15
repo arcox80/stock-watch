@@ -1,19 +1,22 @@
 import React from "react";
-import "./App.css";
+import "./app.css";
 import Search from "./Search";
 import SearchResults from "./SearchResults";
 import Headlines from "./Headlines";
+import Footer from "./Footer";
 
 export default function App(props) {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="App-title">Stock-Watch</h1>
+        <span className="App-title">Stock-Watch</span>
       </header>
-      <Search />
-      <SearchResults />
-      <Headlines />
-      <footer className="App-footer"></footer>
+      <main>
+        <Search />
+        <SearchResults />
+        <Headlines />
+      </main>
+      <Footer />
     </div>
   );
 }

@@ -1,10 +1,9 @@
 import React from "react";
-
-//import "../article.css";
+import "./article.css";
 
 export default function Article(props) {
   return (
-    <div>
+    <div className="article">
       <a href={props.link}>
         <h4>{props.title}</h4>
       </a>

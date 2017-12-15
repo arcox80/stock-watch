@@ -11,14 +11,14 @@ export class Headlines extends React.Component{
     } else if (this.props.headlineSpinner) {
       return (
         <div>
-          <h2>Recent News for {this.props.symbol}</h2>
+          <h2 className="headlines-heading">Recent News for {this.props.symbol}</h2>
           <img className="spinner" src="../../public/loading.gif" alt="Loading"/>
         </div>
       );
     } else if (this.props.headlinesFail) {
       return (
         <div>
-          <h2>Recent News for {this.props.symbol}</h2>
+          <h2 className="headlines-heading">Recent News for {this.props.symbol}</h2>
           <p>I'm sorry, but we were unable to retrieve any headlines. Please make sure you entered a valid ticker symbol.</p>
           <p>If you did enter a valid ticker symbol, then the Yahoo! API is down right now. Please try again later.</p>
         </div>
@@ -29,7 +29,7 @@ export class Headlines extends React.Component{
       );
       return (
         <div>
-          <h2>Recent News for {this.props.symbol}</h2>
+          <h2 className="headlines-heading">Recent News for {this.props.symbol}</h2>
           {listItems}
         </div>
       );

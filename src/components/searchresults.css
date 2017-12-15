@@ -2,3 +2,100 @@ img.spinner {
   width: 50px;
   margin-top: 20px;
 }
+
+.search-results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+    "h h" 
+    "t t" 
+    "cv tc" 
+    "bw om" 
+    "tm oy";
+  grid-gap: 5px;
+}
+
+h2.stock-heading {
+  grid-area: h;
+  margin-bottom: 2px;
+  text-align: center;
+}
+
+span.timestamp {
+  grid-area: t;
+  font-style: italic;
+  font-size: .8rem;
+  text-align: center;
+}
+
+.grid-cube {
+  border: 1px solid rgb(33, 108, 42);
+  border-radius: 10px;
+  background-color: rgb(177, 208, 181);
+  color: black;
+  text-align: center;
+  padding: 5px;
+}
+
+.grid-cube h3,
+h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.grid-cube p {
+  margin: 0;
+}
+
+.current-value {
+  grid-area: cv;
+  border-radius: 20px 0 0 20px;
+  box-shadow: 0 11px 10px -4px #1e1e1e;
+  margin-bottom: 5px;
+}
+
+.todays-change {
+  grid-area: tc;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 0 11px 10px -4px #1e1e1e;
+  margin-bottom: 5px;
+}
+
+.beginning-week {
+  grid-area: bw;
+}
+
+.one-month {
+  grid-area: om;
+}
+
+.three-months {
+  grid-area: tm;
+}
+
+.one-year {
+  grid-area: oy;
+}
+
+.red-highlight {
+  color: #dc3e3e;
+}
+
+@media only screen and (min-width: 768px) {
+  .search-results {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+      "h h h h" 
+      "t t t t" 
+      "cv cv tc tc" 
+      "bw om tm oy";
+    grid-gap: 5px;
+  }
+  h2.stock-heading {
+    font-size: 2em;
+  }
+  span.timestamp {
+    font-size: 1rem;
+  }
+}

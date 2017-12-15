@@ -10,7 +10,7 @@ export class SearchResults extends React.Component {
     } else if (this.props.stockSpinner) {
       return (
         <div>
-          <h2>{this.props.symbol} Stock Information</h2>
+          <h2 className="stock-heading">{this.props.symbol} Stock Information</h2>
           <img className="spinner" src="../../public/loading.gif" alt="Loading"/>
         </div>
       );
@@ -23,22 +23,42 @@ export class SearchResults extends React.Component {
     } else if (this.props.error) {
       return (
         <div>
-          <h2>{this.props.symbol} Stock Information</h2>
+          <h2 className="stock-heading">{this.props.symbol} Stock Information</h2>
           <p>{this.props.error[0]}</p>
           <p>{this.props.error[1]}</p>
         </div>
       );
     } else {
       return (
-        <div>
-          <h2>{this.props.symbol} Stock Information</h2>
-          <h3>Current Value: {this.props.currentValue} USD</h3>
-          <h4>Today's Change: {this.props.change}</h4>
-          <span>{this.props.currentTimeOfQuote}</span>
-          <p>Value at Beginning of Week: {this.props.weekStartingValue}</p>
-          <p>Value 1 Month Ago: {this.props.oneMonthValue}</p>
-          <p>Value 3 Months Ago: {this.props.threeMonthValue}</p>
-          <p>Value 1 Year Ago: {this.props.yearValue}</p>
+        <div className="search-results">
+          <h2 className="stock-heading">{this.props.symbol} Stock Information</h2>
+          <span className="timestamp">{this.props.currentTimeOfQuote}</span>
+          <div className="grid-cube current-value">
+            <h3>Current Value</h3>
+            <span>{this.props.currentValue} USD</span>
+          </div>
+          <div className="grid-cube todays-change">
+            <h3>Today's change</h3>
+            <span className={(this.props.change < 0) ? "red-highlight" : null}>
+              {this.props.change}
+            </span>
+          </div>
+          <div className="grid-cube data beginning-week">
+            <h4>Beginning of Week</h4>
+            <span>{this.props.weekStartingValue} USD</span>
+          </div>
+          <div className="grid-cube data one-month">
+            <h4>1 Month Ago</h4>
+            <span>{this.props.oneMonthValue} USD</span>
+          </div>
+          <div className="grid-cube data three-months">
+            <h4>3 Months Ago</h4>
+            <span>{this.props.threeMonthValue} USD</span>
+          </div>
+          <div className="grid-cube data one-year">
+            <h4>1 Year Ago</h4>
+            <span>{this.props.yearValue} USD</span>
+          </div>
         </div>
       );
     }
