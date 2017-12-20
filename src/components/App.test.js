@@ -4,10 +4,23 @@ import App from "./App";
 import Search from "./Search";
 import SearchResults from "./SearchResults";
 import Headlines from "./Headlines";
+import Footer from "./Footer";
+import Header from "./Header";
+import Intro from "./Intro";
 
 describe("<App />", () => {
   it("Renders without crashing", () => {
     shallow(<App />);
+  });
+
+  it("Renders Header initially", () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.containsMatchingElement(<Header />)).toEqual(true);
+  });
+
+  it("Renders Intro initially", () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.containsMatchingElement(<Intro />)).toEqual(true);
   });
 
   it("Renders Search initially", () => {
@@ -23,5 +36,10 @@ describe("<App />", () => {
   it("Renders Headlines initially", () => {
     const wrapper = shallow(<App />);
     expect(wrapper.containsMatchingElement(<Headlines />)).toEqual(true);
+  });
+
+  it("Renders Footer initially", () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.containsMatchingElement(<Footer />)).toEqual(true);
   });
 });
