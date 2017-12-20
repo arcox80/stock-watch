@@ -39,8 +39,7 @@ span.timestamp {
   padding: 5px;
 }
 
-.grid-cube h3,
-h4 {
+.grid-cube > h3, .grid-cube > h4 {
   margin-top: 0;
   margin-bottom: 5px;
 }

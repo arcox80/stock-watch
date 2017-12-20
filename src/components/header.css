@@ -1,9 +1,8 @@
 header {
-  background-color: rgb(33, 108, 42);
-  border-bottom: 1px solid rgb(24, 82, 31);
+  background-color: rgba(87, 117, 91, .7);
+  border-bottom: 1px solid rgb(21, 24, 21);
   padding: 5px 10px;
   font-size: 2rem;
-  margin-bottom: 20px;
   text-align: center;
 }
 

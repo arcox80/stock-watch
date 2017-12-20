@@ -1,12 +1,11 @@
 footer {
-  background-color: rgb(33, 108, 42);
+  background-color: rgba(87, 117, 91, .7);
+  border-top: 1px solid rgb(21, 24, 21);
   width: 100%;
   min-height: 100px;
   align-self: flex-end;
   order: 99;
   margin-top: 20px;
-  display: grid;
-  grid-auto-columns: minmax(300, auto);
   text-align: center;
   padding: 10px;
 }
@@ -17,6 +16,14 @@ footer a {
 
 footer p, div {
   margin-bottom: 0;
+}
+
+div.footer-container {
+  display: grid;
+  grid-auto-columns: minmax(300, auto);
+  max-width: 768px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a.logo {

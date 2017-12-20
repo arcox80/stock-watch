@@ -47,26 +47,25 @@ export const fetchStock = (stockSymbol) => dispatch => {
       const before = moment("00:00:00", "HH:mm:ss");
       const after = moment("09:30:00", "HH:mm:ss");
       const originalTime = moment().tz("America/New_York");
-      console.log(`Original: ${originalTime.format("MMM D, h:mm A z")}`);
       let formattedTime;
       if (originalTime.isBetween(before, after, [])) {
-        formattedTime = originalTime.subtract(1, "days");
+        formattedTime = moment(originalTime).subtract(1, "days");
         formattedTime.hour(23);
       }
       if (originalTime.day() === 7) {
-        formattedTime = originalTime.subtract(1, "days").format("YYYY[-]MM[-]DD");
+        formattedTime = moment(originalTime).subtract(1, "days").format("YYYY[-]MM[-]DD");
       } else if (originalTime.day() === 0) {
-        formattedTime = originalTime.subtract(2, "days").format("YYYY[-]MM[-]DD");
+        formattedTime = moment(originalTime).subtract(2, "days").format("YYYY[-]MM[-]DD");
       } else {
-        formattedTime = originalTime.format("YYYY[-]MM[-]DD");
+        formattedTime = moment(originalTime).format("YYYY[-]MM[-]DD");
       }
-      console.log(`Still Original?: ${originalTime.format("MMM D, h:mm A z")}`);
-      const endOfWeek = originalTime.endOf("week");
+
+      const endOfWeek = moment(originalTime).endOf("week");
       const prevWeek = endOfWeek.subtract(8, "days");
       const previousWeek = prevWeek.format("YYYY[-]MM[-]DD");
       const prevMonth = prevWeek.subtract(4, "weeks").format("YYYY[-]MM[-]DD");
-      const prev3Month = prevWeek.subtract(12, "weeks").format("YYYY[-]MM[-]DD");
-      const prevYear = prevWeek.subtract(52, "weeks").format("YYYY[-]MM[-]DD");
+      const prev3Month = moment(prevWeek).subtract(12, "weeks").format("YYYY[-]MM[-]DD");
+      const prevYear = moment(prevWeek).subtract(52, "weeks").format("YYYY[-]MM[-]DD");
       const currentVal = parseFloat(stockData["Weekly Time Series"][formattedTime]["4. close"]);
       const startingVal = parseFloat(stockData["Weekly Time Series"][formattedTime]["1. open"]);
       const changeVal = currentVal - startingVal;
@@ -74,7 +73,6 @@ export const fetchStock = (stockSymbol) => dispatch => {
       const oneMonthVal = parseFloat(stockData["Weekly Time Series"][prevMonth]["4. close"]);
       const threeMonthVal = parseFloat(stockData["Weekly Time Series"][prev3Month]["4. close"]);
       const yearVal = parseFloat(stockData["Weekly Time Series"][prevYear]["4. close"]);
-      console.log(`Really Still Original?: ${originalTime.format("MMM D, h:mm A z")}`);
 
       const finalStockData = {
         currentTimeOfQuote: originalTime.format("MMM D, h:mm A z"),

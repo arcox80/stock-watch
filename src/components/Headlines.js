@@ -10,14 +10,14 @@ export class Headlines extends React.Component{
       return (<div></div>);
     } else if (this.props.headlineSpinner) {
       return (
-        <div>
+        <div className="headlines">
           <h2 className="headlines-heading">Recent News for {this.props.symbol}</h2>
           <img className="spinner" src="../../public/loading.gif" alt="Loading"/>
         </div>
       );
     } else if (this.props.headlinesFail) {
       return (
-        <div>
+        <div className="headlines">
           <h2 className="headlines-heading">Recent News for {this.props.symbol}</h2>
           <div className="error">
             <p>I'm sorry, but we were unable to retrieve any headlines. Please make sure you entered a valid ticker symbol.</p>
@@ -30,7 +30,7 @@ export class Headlines extends React.Component{
         <Article key={index} {...article} />
       );
       return (
-        <div>
+        <div className="headlines">
           <h2 className="headlines-heading">Recent News for {this.props.symbol}</h2>
           {listItems}
         </div>

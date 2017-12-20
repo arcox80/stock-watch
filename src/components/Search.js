@@ -20,7 +20,7 @@ export class Search extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submitStock} className="search">
+      <form onSubmit={this.submitStock} className={this.props.symbol ? "margin-fix" : "search"}>
         <label htmlFor="userSearch">Enter the company's stock symbol below.</label>
         <input type="text" name="userSearch" id="userSearch"
           className="text" autoComplete="off" maxLength="5"
