@@ -10,8 +10,5 @@ div.intro-content {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-}
-
-div.intro > h4 {
-  margin-top: 0;
+  font-family: 'Lustria', serif;
 }

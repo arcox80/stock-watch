@@ -9,7 +9,7 @@ html, body{
 }
 
 body {
-  font-family: 'Times New Roman', serif;
+  font-family: 'Raleway', sans-serif;
   background: rgb(78, 148, 85);
   color: #ffffff;
   margin: 0;
@@ -25,4 +25,12 @@ body {
 
 .error p {
   margin: 10px 0;
+}
+
+p, span {
+  font-family: 'Lustria', serif;
+}
+
+input {
+  font-family: 'Raleway', sans-serif;
 }
