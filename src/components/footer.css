@@ -14,7 +14,7 @@ footer a {
   color: rgb(61, 218, 120);
 }
 
-footer p, div {
+footer p, footer div {
   margin-bottom: 0;
   font-family: 'Raleway', sans-serif;
 }
