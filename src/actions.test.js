@@ -1,17 +1,9 @@
-import {
-  FETCH_STOCK_REQUEST, fetchStockRequest, 
-  FETCH_STOCK_SUCCESS, fetchStockSuccess,
-  FETCH_STOCK_FAIL, fetchStockFail,
-  FETCH_HEADLINES_REQUEST, fetchHeadlinesRequest,
-  FETCH_HEADLINES_SUCCESS, fetchHeadlinesSuccess,
-  FETCH_HEADLINES_FAIL, fetchHeadlinesFail,
-  fetchStock, fetchHeadlines
-} from "./actions";
+import * as actions from "./actions";
 import moment from "moment-timezone";
 
-const originalTime = moment().tz("America/New_York");
-const formattedTime = originalTime.format("YYYY[-]MM[-]DD");
-const endOfWeek = originalTime.endOf("week");
+const originalTime = moment("2017-12-18 10:30:01");
+const formattedTime = moment(originalTime).format("YYYY[-]MM[-]DD");
+const endOfWeek = moment(originalTime).endOf("week");
 const prevWeek = endOfWeek.subtract(8, "days");
 const previousWeek = prevWeek.format("YYYY[-]MM[-]DD");
 const prevMonth = prevWeek.subtract(4, "weeks").format("YYYY[-]MM[-]DD");
@@ -59,53 +51,53 @@ const headlineData = `
 describe("fetchStockRequest", () => {
   it("Should return the action", () => {
     const value = "ibm";
-    const action = fetchStockRequest(value);
-    expect(action.type).toEqual(FETCH_STOCK_REQUEST);
+    const action = actions.fetchStockRequest(value);
+    expect(action.type).toEqual(actions.FETCH_STOCK_REQUEST);
     expect(action.value).toEqual(value);
   });
 });
 
 describe("fetchStockFail", () => {
   it("Should return the action", () => {
-    const action = fetchStockFail();
-    expect(action.type).toEqual(FETCH_STOCK_FAIL);
+    const action = actions.fetchStockFail();
+    expect(action.type).toEqual(actions.FETCH_STOCK_FAIL);
   });
 });
 
 describe("fetchStockSuccess", () => {
   it("Should return the action", () => {
     const stockData = { symbol: "IBM" };
-    const action = fetchStockSuccess(stockData);
-    expect(action.type).toEqual(FETCH_STOCK_SUCCESS);
+    const action = actions.fetchStockSuccess(stockData);
+    expect(action.type).toEqual(actions.FETCH_STOCK_SUCCESS);
     expect(action.stockData).toEqual(stockData);
   });
 });
 
 describe("fetchHeadlinesRequest", () => {
   it("Should return the action", () => {
-    const action = fetchHeadlinesRequest();
-    expect(action.type).toEqual(FETCH_HEADLINES_REQUEST);
+    const action = actions.fetchHeadlinesRequest();
+    expect(action.type).toEqual(actions.FETCH_HEADLINES_REQUEST);
   });
 });
 
 describe("fetchHeadlinesFail", () => {
   it("Should return the action", () => {
-    const action = fetchHeadlinesFail();
-    expect(action.type).toEqual(FETCH_HEADLINES_FAIL);
+    const action = actions.fetchHeadlinesFail();
+    expect(action.type).toEqual(actions.FETCH_HEADLINES_FAIL);
   });
 });
 
 describe("fetchHeadlinesSuccess", () => {
   it("Should return the action", () => {
     const headlineData = [{ title: "IBM" }];
-    const action = fetchHeadlinesSuccess(headlineData);
-    expect(action.type).toEqual(FETCH_HEADLINES_SUCCESS);
+    const action = actions.fetchHeadlinesSuccess(headlineData);
+    expect(action.type).toEqual(actions.FETCH_HEADLINES_SUCCESS);
     expect(action.headlineData).toEqual(headlineData);
   });
 });
 
-describe("fetchStock", () => {
-  it("Should dispatch fetchStockSuccess", () => {
+describe("fetchStock", () => {  
+  it("Should dispatch fetchStockRequest and fetchStockSuccess", () => {
     global.fetch = jest.fn().mockImplementation(() =>
       Promise.resolve({
         ok: true,
@@ -127,9 +119,13 @@ describe("fetchStock", () => {
     finalStockData.change = (finalStockData.currentValue - finalStockData.startingValue).toFixed(2);
 
     const dispatch = jest.fn();
-    return fetchStock("ibm")(dispatch).then(() => {
+    const stockRequestSpy = jest.spyOn(actions, "fetchStockRequest");
+    const fetchSuccessSpy = jest.spyOn(actions, "fetchStockSuccess");
+    return actions.fetchStock("ibm")(dispatch).then(() => {
+      expect(dispatch).toHaveBeenCalled();
+      expect(stockRequestSpy).toHaveBeenCalledWith("ibm");
       expect(fetch).toHaveBeenCalledWith("/data/ibm");
-      expect(dispatch).toHaveBeenCalledWith(fetchStockSuccess(finalStockData));
+      expect(fetchSuccessSpy).toHaveBeenCalledWith(finalStockData);
     });
   });
 });
@@ -159,9 +155,9 @@ describe("fetchHeadlines", () => {
     ];
 
     const dispatch = jest.fn();
-    return fetchHeadlines("ibm")(dispatch).then(() => {
+    return actions.fetchHeadlines("ibm")(dispatch).then(() => {
       expect(fetch).toHaveBeenCalledWith("/headlines/ibm");
-      expect(dispatch).toHaveBeenCalledWith(fetchHeadlinesSuccess(finalHeadlineData));
+      expect(dispatch).toHaveBeenCalledWith(actions.fetchHeadlinesSuccess(finalHeadlineData));
     });
   });
 });

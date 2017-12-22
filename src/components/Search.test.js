@@ -19,7 +19,6 @@ describe("<Search />", () => {
     expect(dispatch).toHaveBeenCalled();
     expect(stockSpy).toHaveBeenCalledWith(value);
     expect(headlinesSpy).toHaveBeenCalledWith(value);
-    //expect(dispatch).toHaveBeenCalledWith(fetchStock(value), fetchHeadlines(value));
   });
   
   it("Should reset the input when the form is submitted", () => {

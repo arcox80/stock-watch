@@ -9,7 +9,7 @@ export class SearchResults extends React.Component {
       return (<div></div>);
     } else if (this.props.stockSpinner) {
       return (
-        <div>
+        <div className="js-spinner">
           <h2 className="stock-heading">{this.props.symbol} Stock Information</h2>
           <img className="spinner" src="../../public/loading.gif" alt="Loading"/>
         </div>
@@ -27,7 +27,7 @@ export class SearchResults extends React.Component {
       );
     } else if (this.props.error) {
       return (
-        <div>
+        <div className=".js-error">
           <h2 className="stock-heading" style={{ marginBottom: 10 }}>
             {this.props.symbol} Stock Information
           </h2>
@@ -44,29 +44,29 @@ export class SearchResults extends React.Component {
           <span className="timestamp">{this.props.currentTimeOfQuote}</span>
           <div className="grid-cube current-value">
             <h3>Current Value</h3>
-            <span>{this.props.currentValue} USD</span>
+            <span className="js-currentValue">{this.props.currentValue} USD</span>
           </div>
           <div className="grid-cube todays-change">
             <h3>Today's change</h3>
-            <span className={(this.props.change < 0) ? "red-highlight" : null}>
+            <span className={(this.props.change < 0) ? "red-highlight js-change" : "js-change"}>
               {this.props.change}
             </span>
           </div>
           <div className="grid-cube data beginning-week">
             <h4>Beginning of Week</h4>
-            <span>{this.props.weekStartingValue} USD</span>
+            <span className="js-weekStart">{this.props.weekStartingValue} USD</span>
           </div>
           <div className="grid-cube data one-month">
             <h4>1 Month Ago</h4>
-            <span>{this.props.oneMonthValue} USD</span>
+            <span className="js-oneMonth">{this.props.oneMonthValue} USD</span>
           </div>
           <div className="grid-cube data three-months">
             <h4>3 Months Ago</h4>
-            <span>{this.props.threeMonthValue} USD</span>
+            <span className="js-threeMonths">{this.props.threeMonthValue} USD</span>
           </div>
           <div className="grid-cube data one-year">
             <h4>1 Year Ago</h4>
-            <span>{this.props.yearValue} USD</span>
+            <span className="js-oneYear">{this.props.yearValue} USD</span>
           </div>
         </div>
       );
