@@ -1,6 +1,6 @@
 div.article {
-  background-color: rgb(177, 208, 181);
-  border: 1px solid rgb(33, 108, 42);
+  background-color: rgba(149, 167, 151, 0.93);
+  border: 1px solid #1e1e1e;
   color: black;
   padding: 5px 10px;
   margin-bottom: 5px;
@@ -8,7 +8,7 @@ div.article {
 }
 
 div.article a {
-  color: rgb(28, 160, 77);
+  color: rgb(21, 86, 45);
 }
 
 div.article h4 {

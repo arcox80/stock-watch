@@ -18,12 +18,12 @@ input[type="submit"] {
   border-radius: 4px;
   padding: 5px;
   margin-top: 5px;
-  background-color: rgb(27, 187, 46);
+  background-color: rgb(43, 165, 57);
   color: #ffffff;
 }
 
 input[type="submit"]:hover {
-  background-color: rgb(27, 252, 54);
+  background-color: rgb(27, 187, 46);
   box-shadow: 4px 9px 10px -6px #1e1e1e;
   transform: translate(0px, -3px);
 }

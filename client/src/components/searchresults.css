@@ -31,9 +31,9 @@ span.timestamp {
 }
 
 .grid-cube {
-  border: 1px solid rgb(33, 108, 42);
+  border: 1px solid #1e1e1e;
   border-radius: 10px;
-  background-color: rgb(177, 208, 181);
+  background-color: rgba(149, 167, 151, 0.93);
   color: black;
   text-align: center;
   padding: 5px;
