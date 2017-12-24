@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "nodemon server.js",
-    "heroku-postbuild": "cd client && yarn --production=false && yarn run build"
+    "build": "cd client && yarn run build"
   },
   "author": "",
   "license": "ISC",
