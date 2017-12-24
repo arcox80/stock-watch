@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: DIzgkt5ySMq9XRSPxZWSgph8ht5oAdBP+JjERVD/kni6eUg+kXRqX499tV/eC0U3GwBJtj9b12c+kITMUvmAExhBWm8CKmf5+Nd1zOZ8U8KfE4I/3Dutd5HwxFMi3+9BDJ4WLujs6Udu7dYtJUjdT2+EFxNpGcfG/gWAgHx3I1kGuG/hVbw1jLKTsV/WrpUnksO0eZOOF+Rc5X9gu9JGnecaESa/8Wbjb84aBkJBdbEqpuT4q/qYvhA9PBLCVRVNY1GlJ9AIZv37hRMDcG2pQxvJdtBp0KlXVH5KDZoVRIVXbL0sTP21gQYOeCaL9GhMjeBx4+dRr/yCqQXlu98+f1aoMCU98iBlqJ4aRaRv07N4Z99twVaGzMAiXz4KTLZdpOE5D23GOy4kHkvHcvES3x3CJ6SJYbIPCCmLuRJy+/Fp6A9eK7E4TOBBEMjb7OxdfVSU+WGxORisD2xzI2d3tq82F/ufW1h7UHaBvy1Ojj2ncQRw+g+tBx6y2JbU7/qcwNu/0kur9vRG8/dUYSnpSiq/W2OFuJgRlCvnmRAl+TNH5mBFk43IXdID0/AcmW/v7q8yPpG346aL9k1pscgPOF7/P9A290mRFCYFWmjm3j85TnAtblcZnYmpqQRJfzUDIJ4gwaTfqBu73YiZEpJe5n0AACk6U9sOGHdq0Rex4UE=
+  app: stock-watch
+  on:
+    repo: arcox80/stock-watch

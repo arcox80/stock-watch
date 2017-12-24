@@ -1,9 +1,10 @@
 const express = require("express");
 const request = require("request");
 const http = require("http");
+const path = require("path");
 const app = express();
 
-app.use(express.static("client"));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 app.get("/data/:query", (req, res) => {
   let url = `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=${req.params.query}&apikey=S3H1N4O2750Y09RN`;
