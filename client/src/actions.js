@@ -67,8 +67,6 @@ export const fetchStock = (stockSymbol) => dispatch => {
       const prevMonth = prevWeek.subtract(4, "weeks").format("YYYY[-]MM[-]DD");
       const prev3Month = moment(prevWeek).subtract(12, "weeks").format("YYYY[-]MM[-]DD");
       const prevYear = moment(prevWeek).subtract(52, "weeks").format("YYYY[-]MM[-]DD");
-      console.log(originalTime);
-      console.log(formattedTime);
       const currentVal = parseFloat(stockData["Weekly Time Series"][formattedTime]["4. close"]);
       const startingVal = parseFloat(stockData["Weekly Time Series"][formattedTime]["1. open"]);
       const changeVal = currentVal - startingVal;
