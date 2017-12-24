@@ -48,11 +48,12 @@ export const fetchStock = (stockSymbol) => dispatch => {
       const after = moment("09:30:00", "HH:mm:ss");
       const originalTime = moment().tz("America/New_York");
       let formattedTime;
+      //set time to previous day when stock market hasn't opened yet
       if (originalTime.isBetween(before, after, [])) {
         formattedTime = moment(originalTime).subtract(1, "days");
         formattedTime.hour(23);
       }
-      if (originalTime.day() === 7) {
+      if (originalTime.day() === 6) {
         formattedTime = moment(originalTime).subtract(1, "days").format("YYYY[-]MM[-]DD");
       } else if (originalTime.day() === 0) {
         formattedTime = moment(originalTime).subtract(2, "days").format("YYYY[-]MM[-]DD");
@@ -66,6 +67,8 @@ export const fetchStock = (stockSymbol) => dispatch => {
       const prevMonth = prevWeek.subtract(4, "weeks").format("YYYY[-]MM[-]DD");
       const prev3Month = moment(prevWeek).subtract(12, "weeks").format("YYYY[-]MM[-]DD");
       const prevYear = moment(prevWeek).subtract(52, "weeks").format("YYYY[-]MM[-]DD");
+      console.log(originalTime);
+      console.log(formattedTime);
       const currentVal = parseFloat(stockData["Weekly Time Series"][formattedTime]["4. close"]);
       const startingVal = parseFloat(stockData["Weekly Time Series"][formattedTime]["1. open"]);
       const changeVal = currentVal - startingVal;
