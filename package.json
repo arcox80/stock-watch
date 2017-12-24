@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "nodemon server.js",
-    "heroku-postbuild": "cd client && yarn --production=false && yarn run build"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
